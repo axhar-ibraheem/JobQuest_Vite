@@ -2,7 +2,7 @@ const FormRow = (props) => {
   const { type, placeholder, name, id, value } = props.input;
   
   return (
-    <div className="mb-3">
+    <div className="mb-3 relative">
       <label
         htmlFor={id}
         className="capitalize block mb-3 md:text-lg tracking-wider"
@@ -17,8 +17,10 @@ const FormRow = (props) => {
         id={id}
         name={name}
         onChange={props.onChange}
+        onBlur={props.onBlur}
         value={value}
       />
+      {props.eyeIcon}
     </div>
   );
 };
