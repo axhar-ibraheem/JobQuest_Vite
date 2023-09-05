@@ -11,7 +11,7 @@ const Landing = () => {
         <div className="max-w-6xl w-11/12  grid md:grid-cols-2 items-center">
           <div className="">
             <h1 className="md:text-6xl text-3xl capitalize text-cyan-800 font-bold mb-5 tracking-wide">
-              job board
+              job quest
             </h1>
             <p className="capitalize text-xl italic mb-3 tracking-wide">
               Your Pathway to the Perfect Job!

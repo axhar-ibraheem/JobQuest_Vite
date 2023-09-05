@@ -12,27 +12,6 @@ const Jobs = ({ locationSearch, titleSearch, categorySearch, jobs, showSpinner }
         job.location.toLowerCase().startsWith(locationSearch.toLowerCase()) &&
         job.category.toLowerCase().startsWith(categorySearch)
   );
-
-  // useEffect(() => {
-  //   setShowSpinner(true);
-  //   async function getJobs() {
-  //     try {
-  //       const response = await axios.get(
-  //         "https://jobsboard-e5259-default-rtdb.firebaseio.com/jobs_data.json"
-  //       );
-  //       if (response.status === 200) {
-  //         const { data } = response;
-  //         setJobs([...data]);
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     } finally {
-  //       setShowSpinner(false);
-  //     }
-  //   }
-  //   getJobs();
-  // }, []);
-
   return (
     <div className="lg:col-span-2 relative grid grid-cols-1 gap-5 place-self-start w-full">
       {filteredJobs.map((job) => (

@@ -4,14 +4,14 @@ import FormRow from "./FormRow";
 import AuthContext from "../../store/authContext";
 import Spinner from "../UI/Spinner";
 import useInput from "../../hooks/useInput";
-import Message from "../UI/Notification/Message";
+import useHttp from "../../hooks/useHttp";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
-import axios from "axios";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 const Login = (props) => {
   const ctx = useContext(AuthContext);
   const history = useHistory();
+  const [loginHandler, show] = useHttp();
   const [showPassword, setShowPassword] = useState(false);
 
   const [
@@ -30,37 +30,57 @@ const Login = (props) => {
     resetPasswordState,
   ] = useInput((password) => password.length > 7);
 
-  const [show, setShow] = useState(false);
   const passwordVisibilityHandler = () => {
     setShowPassword((preVal) => !preVal);
   };
 
   const endPointUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${ctx.apiKey}`;
-  const onSubmitHandler = async (event) => {
-    try {
-      event.preventDefault();
-      if (emailHasError || passwordHasError) return;
-      setShow(true);
-      const response = await axios.post(endPointUrl, {
-        email: enteredEmail,
-        password: enteredPassword,
-        returnSecureToken: true,
-      });
-      if (response.status === 200) {
-        const { idToken, email } = response.data;
+  
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    if (emailHasError || passwordHasError) return;
+    const data = {
+      email: enteredEmail,
+      password: enteredPassword,
+      returnSecureToken: true,
+    };
+    const onSucces = (data) => {
+        const { idToken, email } = data;
         ctx.login(idToken, email);
         resetEmailState();
         resetPasswordState();
         history.replace("/dashboard");
-      }
-    } catch (error) {
-      const { data } = error.response;
-      toast.error(data.error.message, {
+    };
+    const onError = (errorResponse) => {
+          toast.error(errorResponse, {
         position: toast.POSITION.TOP_CENTER,
       });
-    } finally {
-      setShow(false);
-    }
+    };
+    loginHandler(endPointUrl, "POST", data, onSucces, onError );
+    // try {
+    //
+    //
+    //   setShow(true);
+    //   const response = await axios.post(endPointUrl, {
+    //     email: enteredEmail,
+    //     password: enteredPassword,
+    //     returnSecureToken: true,
+    //   });
+    //   if (response.status === 200) {
+    //     const { idToken, email } = response.data;
+    //     ctx.login(idToken, email);
+    //     resetEmailState();
+    //     resetPasswordState();
+    //     history.replace("/dashboard");
+    //   }
+    // } catch (error) {
+    //   const { data } = error.response;
+    //   toast.error(data.error.message, {
+    //     position: toast.POSITION.TOP_CENTER,
+    //   });
+    // } finally {
+    //   setShow(false);
+    // }
   };
   return (
     <>
@@ -77,8 +97,8 @@ const Login = (props) => {
             }}
             onChange={emailInputHandler}
             onBlur={emailBlurHandler}
-            error = {emailHasError}
-            message = "Email must include @"
+            error={emailHasError}
+            message="Email must include @"
           />
           <FormRow
             label="password"
@@ -90,8 +110,8 @@ const Login = (props) => {
             }}
             onChange={passwordInputHandler}
             onBlur={passwordBlurHandler}
-            error = {passwordHasError}
-            message = "Password must be more than seven characters long!"
+            error={passwordHasError}
+            message="Password must be more than seven characters long!"
             eyeIcon={
               enteredPassword.length > 0 && (
                 <div

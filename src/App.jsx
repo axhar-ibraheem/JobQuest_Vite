@@ -1,4 +1,5 @@
 import Landing from "./Components/Landing";
+import ScrollToTop from "./Components/UI/ScrollToTop";
 import { Route, Switch, Redirect } from "react-router-dom/cjs/react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
 import JobDetail from "./Components/Dashboard/JobDetail";
@@ -6,38 +7,31 @@ import Profile from "./Components/Dashboard/Profile";
 import { useContext, useState, useEffect } from "react";
 import AuthContext from "./store/authContext";
 import Dashboard from "./Components/Dashboard/Dashboard";
-import axios from "axios";
+import useHttp from "./hooks/useHttp";
+
 function App() {
   const ctx = useContext(AuthContext);
   const isAuthenticated = !!ctx.idToken;
   const [jobs, setJobs] = useState([]);
-  const [showSpinner, setShowSpinner] = useState(false);
-  
+  const [ getJobs, showSpinner ] = useHttp()
+  const endPointUrl = "https://jobsboard-e5259-default-rtdb.firebaseio.com/jobs_data.json"
+
   useEffect(() => {
-    setShowSpinner(true);
-    async function getJobs() {
-      try {
-        const response = await axios.get(
-          "https://jobsboard-e5259-default-rtdb.firebaseio.com/jobs_data.json"
-        );
-        if (response.status === 200) {
-          const { data } = response;
-          setJobs([...data]);
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setShowSpinner(false);
-      }
+    const onSucces = (data)=> {
+            setJobs([...data])
     }
-    if (isAuthenticated) {
-      getJobs();
+    const onError = (errorResponse)=> {
+            console.log(errorResponse)
+    }
+     if (isAuthenticated) {
+      getJobs(endPointUrl, "GET", null, onSucces, onError);
     } else {
       setJobs([]);
     }
   }, [isAuthenticated]);
   return (
     <>
+    <ScrollToTop/>
       <Navbar />
       <section className="bg-slate-50 min-h-screen">
         <Switch>

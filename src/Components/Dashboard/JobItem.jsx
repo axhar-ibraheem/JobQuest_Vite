@@ -53,7 +53,7 @@ const JobItem = ({
       </div>
       <div className="mt-7 flex gap-3">
         <Link to = {`/dashboard/${id}`}>
-          <button className="bg-sky-200 px-4 py-1 rounded-md text-gray-600 shadow-md capitalize tracking-wide">
+          <button className="bg-blue-800 px-4 py-2 rounded-md text-white shadow-lg shadow-gray-300 capitalize tracking-wide transition ease-linear duration-300 delay-150 hover:shadow-gray-500">
             veiw details
           </button>
         </Link>

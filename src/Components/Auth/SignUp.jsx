@@ -3,17 +3,15 @@ import FormRow from "./FormRow";
 import Spinner from "../UI/Spinner";
 import { useState } from "react";
 import useInput from "../../hooks/useInput";
-import axios from "axios";
 import { useContext } from "react";
 import AuthContext from "../../store/authContext";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
-
+import useHttp from "../../hooks/useHttp";
 const SignUp = (props) => {
-  const [showSpinner, setShowSpinner] = useState(false);
   const ctx = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
-
+  const [signUpHandler, showSpinner] = useHttp();
   const regex = /^\S+\s+\S+/;
   const [
     enteredFullName,
@@ -62,51 +60,43 @@ const SignUp = (props) => {
 
   const endPointURL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${ctx.apiKey}`;
 
-  const signUpHandler = async (event) => {
-    try {
-      event.preventDefault();
-
-      if (
-        nameHasError ||
-        emailHasError ||
-        passwordHasError ||
-        confirmPasswordHasError
-      ) {
-        return;
-      }
-      setShowSpinner(true);
-
-      const response = await axios.post(
-        endPointURL,
-        {
-          email: enteredEmail,
-          password: enteredPassword,
-          returnSecureToken: true,
-        }
-      );
-      if (response.status === 200) {
-        toast.success("Welcome! Login with your credentials", {
-          position: toast.POSITION.TOP_CENTER,
-        });
-      }
-    } catch (error) {
-      const { data } = error.response;
-      toast.warn(data.error.message, {
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    if (
+      nameHasError ||
+      emailHasError ||
+      passwordHasError ||
+      confirmPasswordHasError
+    ) {
+      return;
+    }
+    const data = {
+      email: enteredEmail,
+      password: enteredPassword,
+      returnSecureToken: true,
+    };
+    const onSucces = (data) => {
+      console.log(data);
+      toast.success("Welcome! Login with your credentials", {
         position: toast.POSITION.TOP_CENTER,
       });
-    } finally {
-      setShowSpinner(false);
       resetNameState();
       resetEmailState();
       resetPasswordState();
       resetConfirmPasswordState();
-    }
+    };
+    const onError = (errorResponse) => {
+      toast.warn(errorResponse, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    };
+    signUpHandler(endPointURL, "POST", data, onSucces, onError);
   };
 
   return (
     <>
       <Modal setShow={props.setShow}>
-        <form onSubmit={signUpHandler}>
+        <form onSubmit={onSubmitHandler}>
           <FormRow
             label="full name"
             input={{
