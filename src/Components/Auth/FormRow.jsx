@@ -7,7 +7,7 @@ const FormRow = (props) => {
     <div className="mb-3 relative">
       <label
         htmlFor={id}
-        className="capitalize block mb-3 md:text-lg tracking-wider"
+        className="capitalize block mb-1 md:mb-3 md:text-lg tracking-wider"
       >
         {props.label}
       </label>

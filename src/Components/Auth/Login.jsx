@@ -57,30 +57,6 @@ const Login = (props) => {
       });
     };
     loginHandler(endPointUrl, "POST", data, onSucces, onError );
-    // try {
-    //
-    //
-    //   setShow(true);
-    //   const response = await axios.post(endPointUrl, {
-    //     email: enteredEmail,
-    //     password: enteredPassword,
-    //     returnSecureToken: true,
-    //   });
-    //   if (response.status === 200) {
-    //     const { idToken, email } = response.data;
-    //     ctx.login(idToken, email);
-    //     resetEmailState();
-    //     resetPasswordState();
-    //     history.replace("/dashboard");
-    //   }
-    // } catch (error) {
-    //   const { data } = error.response;
-    //   toast.error(data.error.message, {
-    //     position: toast.POSITION.TOP_CENTER,
-    //   });
-    // } finally {
-    //   setShow(false);
-    // }
   };
   return (
     <>
