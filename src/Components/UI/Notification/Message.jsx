@@ -1,6 +1,6 @@
 const Message = (props) => {
   return (
-    <p className="text-red-400 text-sm capitalize">
+    <p className="text-red-400 text-sm">
        {props.text}
     </p>
   );

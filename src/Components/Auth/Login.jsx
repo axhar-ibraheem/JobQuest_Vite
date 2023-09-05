@@ -77,8 +77,9 @@ const Login = (props) => {
             }}
             onChange={emailInputHandler}
             onBlur={emailBlurHandler}
+            error = {emailHasError}
+            message = "Email must include @"
           />
-          {emailHasError && <Message text="email must include @" />}
           <FormRow
             label="password"
             input={{
@@ -89,18 +90,19 @@ const Login = (props) => {
             }}
             onChange={passwordInputHandler}
             onBlur={passwordBlurHandler}
+            error = {passwordHasError}
+            message = "Password must be more than seven characters long!"
             eyeIcon={
-              <div
-                onClick={passwordVisibilityHandler}
-                className="absolute bottom-3 right-4 lg:text-xl text-cyan-900"
-              >
-                {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-              </div>
+              enteredPassword.length > 0 && (
+                <div
+                  onClick={passwordVisibilityHandler}
+                  className="absolute bottom-3 right-4 lg:text-xl text-cyan-900"
+                >
+                  {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+                </div>
+              )
             }
           />
-          {passwordHasError && (
-            <Message text="password must be more than seven characters long" />
-          )}
           <button className="text-xl mb-4 mt-3 bg-cyan-900 text-white px-4 py-2 w-full rounded-md capitalize tracking-wide">
             {show ? <Spinner classes="w-8 h-8" /> : "login"}
           </button>

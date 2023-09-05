@@ -6,12 +6,11 @@ import useInput from "../../hooks/useInput";
 import axios from "axios";
 import { useContext } from "react";
 import AuthContext from "../../store/authContext";
-import Message from "../UI/Notification/Message";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 
 const SignUp = (props) => {
-  const [show, setShow] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
   const ctx = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -52,6 +51,15 @@ const SignUp = (props) => {
     setShowPassword((preVal) => !preVal);
   };
 
+  const passwordVisiblityIcon = (
+    <div
+      onClick={passwordVisibilityHandler}
+      className="absolute bottom-3 right-4 lg:text-xl text-cyan-900"
+    >
+      {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+    </div>
+  );
+
   const endPointURL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${ctx.apiKey}`;
 
   const signUpHandler = async (event) => {
@@ -66,7 +74,7 @@ const SignUp = (props) => {
       ) {
         return;
       }
-      setShow(true);
+      setShowSpinner(true);
 
       const response = await axios.post(
         endPointURL,
@@ -74,31 +82,25 @@ const SignUp = (props) => {
           email: enteredEmail,
           password: enteredPassword,
           returnSecureToken: true,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
         }
       );
       if (response.status === 200) {
-        console.log(response.data);
-        toast.success('Welcome! Login with your credentials', {
-          position: toast.POSITION.TOP_CENTER
-        })
+        toast.success("Welcome! Login with your credentials", {
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
     } catch (error) {
-      const { data } = error.response
+      const { data } = error.response;
       toast.warn(data.error.message, {
-        position: toast.POSITION.TOP_CENTER
-      } )
+        position: toast.POSITION.TOP_CENTER,
+      });
     } finally {
-      setShow(false);
+      setShowSpinner(false);
+      resetNameState();
+      resetEmailState();
+      resetPasswordState();
+      resetConfirmPasswordState();
     }
-    resetNameState();
-    resetEmailState();
-    resetPasswordState();
-    resetConfirmPasswordState();
   };
 
   return (
@@ -116,8 +118,9 @@ const SignUp = (props) => {
             }}
             onChange={nameInputHandler}
             onBlur={nameBlurHandler}
+            error={nameHasError}
+            message="Please enter the full name"
           />
-          {nameHasError && <Message text="please enter the full name" />}
           <FormRow
             label="email"
             input={{
@@ -129,6 +132,8 @@ const SignUp = (props) => {
             }}
             onChange={emailInputHandler}
             onBlur={emailBlurHandler}
+            error={emailHasError}
+            message="Email must include `@`"
           />
           <FormRow
             label="password"
@@ -140,18 +145,10 @@ const SignUp = (props) => {
             }}
             onChange={passwordInputHandler}
             onBlur={passwordBlurHandler}
-            eyeIcon={
-              <div
-                onClick={passwordVisibilityHandler}
-                className="absolute bottom-3 right-4 lg:text-xl text-cyan-900"
-              >
-                {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-              </div>
-            }
+            error={passwordHasError}
+            message="Password must be more than seven characters long!"
+            eyeIcon={enteredPassword.length > 0 && passwordVisiblityIcon}
           />
-          {passwordHasError && (
-            <Message text="password must be more than seven characters long" />
-          )}
           <FormRow
             label="confirm password"
             input={{
@@ -162,18 +159,12 @@ const SignUp = (props) => {
             }}
             onChange={confirmPasswordInputHandler}
             onBlur={confirmPasswordBlurHandler}
-            eyeIcon={
-              <div
-                onClick={passwordVisibilityHandler}
-                className="absolute bottom-3 right-4 lg:text-xl text-cyan-900"
-              >
-                {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-              </div>
-            }
+            error={confirmPasswordHasError}
+            message="Passwords don't match!"
+            eyeIcon={enteredConfirmPassword.length > 0 && passwordVisiblityIcon}
           />
-          {confirmPasswordHasError && <Message text="passwords don't match" />}
           <button className="text-xl mb-4 mt-3 bg-cyan-900 text-white px-4 py-2 w-full rounded-md capitalize tracking-wide">
-            {show ? <Spinner classes="w-8 h-8" /> : "register"}
+            {showSpinner ? <Spinner classes="w-8 h-8" /> : "register"}
           </button>
         </form>
       </Modal>

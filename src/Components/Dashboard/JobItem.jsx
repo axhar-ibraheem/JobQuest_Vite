@@ -2,6 +2,7 @@ import formatDate from "../../utils/dateFormat";
 import { ImLocation } from "react-icons/im";
 import { BiCalendar, BiSolidTimeFive } from "react-icons/bi";
 import { FaToolbox } from "react-icons/fa";
+import { Link } from "react-router-dom";
 const JobItem = ({
   id,
   title,
@@ -51,12 +52,11 @@ const JobItem = ({
         </div>
       </div>
       <div className="mt-7 flex gap-3">
-        <button className="bg-sky-200 px-4 py-1 rounded-md text-gray-600 shadow-md capitalize tracking-wide">
-          apply
-        </button>
-        <button className="bg-red-200 px-4 py-1 text-gray-600 shadow-md rounded-md capitalize tracking-wide">
-          decline
-        </button>
+        <Link to = {`/dashboard/${id}`}>
+          <button className="bg-sky-200 px-4 py-1 rounded-md text-gray-600 shadow-md capitalize tracking-wide">
+            veiw details
+          </button>
+        </Link>
       </div>
     </article>
   );

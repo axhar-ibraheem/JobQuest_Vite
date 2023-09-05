@@ -13,8 +13,8 @@ const useInput = (validateValue) => {
   const valueIsValid = validateValue(enteredValue);
   const hasError = !valueIsValid && isTouched;
 
-  const reset = () => {
-    setEnteredValue("");
+  const reset = (text = "") => {
+    setEnteredValue(text);
     setIsTouched(false)
   };
   return [enteredValue, valueChangeHandler, inputBlurHandler, hasError, reset];
