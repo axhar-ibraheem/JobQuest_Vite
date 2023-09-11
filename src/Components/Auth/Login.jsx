@@ -6,6 +6,7 @@ import Spinner from "../UI/Spinner";
 import useInput from "../../hooks/useInput";
 import useHttp from "../../hooks/useHttp";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { IoMdLogIn } from "react-icons/io";
 import { ToastContainer, toast } from "react-toastify";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 const Login = (props) => {
@@ -35,7 +36,7 @@ const Login = (props) => {
   };
 
   const endPointUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${ctx.apiKey}`;
-  
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
     if (emailHasError || passwordHasError) return;
@@ -45,18 +46,18 @@ const Login = (props) => {
       returnSecureToken: true,
     };
     const onSucces = (data) => {
-        const { idToken, email } = data;
-        ctx.login(idToken, email);
-        resetEmailState();
-        resetPasswordState();
-        history.replace("/dashboard");
+      const { idToken, email } = data;
+      ctx.login(idToken, email);
+      resetEmailState();
+      resetPasswordState();
+      history.replace("/dashboard");
     };
     const onError = (errorResponse) => {
-          toast.error(errorResponse, {
+      toast.error(errorResponse, {
         position: toast.POSITION.TOP_CENTER,
       });
     };
-    loginHandler(endPointUrl, "POST", data, onSucces, onError );
+    loginHandler(endPointUrl, "POST", data, onSucces, onError);
   };
   return (
     <>
@@ -99,8 +100,11 @@ const Login = (props) => {
               )
             }
           />
-          <button className="text-xl mb-4 mt-3 bg-cyan-900 text-white px-4 py-2 w-full rounded-md capitalize tracking-wide">
-            {show ? <Spinner classes="w-8 h-8" /> : "login"}
+          <button className="text-lg lg:text-xl mb-4 mt-3 gap-2 flex items-center justify-center  bg-cyan-900 text-white px-4 py-2 w-full rounded-md capitalize tracking-wide">
+            <span className="">login</span>
+            <span className="inline-block">
+              {show ? <Spinner classes="w-5 h-5" /> : <IoMdLogIn />}
+            </span>
           </button>
         </form>
       </Modal>

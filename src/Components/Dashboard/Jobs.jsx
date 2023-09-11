@@ -1,8 +1,12 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
 import JobItem from "./JobItem";
 import Spinner from "../UI/Spinner";
-const Jobs = ({ locationSearch, titleSearch, categorySearch, jobs, showSpinner }) => {
+const Jobs = ({
+  locationSearch,
+  titleSearch,
+  categorySearch,
+  jobs,
+  showSpinner,
+}) => {
   const filteredJobs = jobs.filter((job) =>
     !titleSearch.toLowerCase().trim() &&
     !locationSearch.toLowerCase().trim() &&

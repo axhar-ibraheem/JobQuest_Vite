@@ -1,11 +1,14 @@
 import Modal from "../UI/Modal";
 import FormRow from "./FormRow";
 import Spinner from "../UI/Spinner";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import useInput from "../../hooks/useInput";
-import { useContext } from "react";
 import AuthContext from "../../store/authContext";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import {
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+  AiOutlinePlusCircle,
+} from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 import useHttp from "../../hooks/useHttp";
 const SignUp = (props) => {
@@ -153,8 +156,15 @@ const SignUp = (props) => {
             message="Passwords don't match!"
             eyeIcon={enteredConfirmPassword.length > 0 && passwordVisiblityIcon}
           />
-          <button className="text-xl mb-4 mt-3 bg-cyan-900 text-white px-4 py-2 w-full rounded-md capitalize tracking-wide">
-            {showSpinner ? <Spinner classes="w-8 h-8" /> : "register"}
+          <button className="text-lg lg:text-xl mb-4 mt-3 flex items-center justify-center gap-2 bg-cyan-900 text-white px-4 py-2 w-full rounded-md capitalize tracking-wide">
+            <span>register</span>
+            <span>
+              {showSpinner ? (
+                <Spinner classes="w-5 h-5" />
+              ) : (
+                <AiOutlinePlusCircle />
+              )}
+            </span>
           </button>
         </form>
       </Modal>
