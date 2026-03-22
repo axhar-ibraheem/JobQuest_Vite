@@ -77,7 +77,7 @@ const JobDetail = ({ jobs }: JobDetailProps) => {
             </div>
             <div className="hidden sm:block place-self-end">
               <div className="flex items-center gap-3 text-gray-500">
-                <BiCalendar className="text-2xl text-blue-800" />
+                <BiCalendar className="text-2xl text-blue-800"></BiCalendar>
                 <p>{formattedDate}</p>
               </div>
               <div>
@@ -90,17 +90,17 @@ const JobDetail = ({ jobs }: JobDetailProps) => {
 
           <div className="flex justify-between gap-4 flex-wrap mt-7 ">
             <div className="flex items-center  gap-2 text-gray-500">
-              <ImLocation className="text-2xl drop-shadow-lg lg:text-3xl text-blue-800" />
+              <ImLocation className="text-2xl drop-shadow-lg lg:text-3xl text-blue-800"></ImLocation>
               <p className="capitalize tracking-wide lg:text-xl">{location}</p>
             </div>
             <div className="flex items-center gap-2 text-gray-500">
-              <AiOutlineDollar className="text-2xl drop-shadow-lg lg:text-3xl text-blue-800" />
+              <AiOutlineDollar className="text-2xl drop-shadow-lg lg:text-3xl text-blue-800"></AiOutlineDollar>
               <p className="capitalize tracking-wide lg:text-xl">
                 100,000 USD{" "}
               </p>
             </div>
             <div className="flex items-center gap-2 text-gray-500">
-              <BiSolidTimeFive className="text-2xl drop-shadow-lg lg:text-3xl text-blue-800" />
+              <BiSolidTimeFive className="text-2xl drop-shadow-lg lg:text-3xl text-blue-800"></BiSolidTimeFive>
               <p className="capitalize text-green-800 tracking-wider lg:text-xl">
                 {job_type}
               </p>
@@ -108,7 +108,7 @@ const JobDetail = ({ jobs }: JobDetailProps) => {
           </div>
           <div className="sm:hidden">
             <div className="flex items-center gap-3 text-gray-500">
-              <BiCalendar className="text-2xl text-blue-800" />
+              <BiCalendar className="text-2xl text-blue-800"></BiCalendar>
               <p>{formattedDate}</p>
             </div>
             <div>
@@ -158,7 +158,7 @@ const JobDetail = ({ jobs }: JobDetailProps) => {
               about the company
             </h1>
             <div className="flex items-center gap-2">
-              <PiSlackLogoDuotone className="text-3xl bg-blue-700 text-white  w-14 h-14 p-2 rounded-md" />
+              <PiSlackLogoDuotone className="text-3xl bg-blue-700 text-white  w-14 h-14 p-2 rounded-md"></PiSlackLogoDuotone>
               <div>
                 <h1 className="text-xl font-semibold text-blue-600 tracking-wider">
                   {company_name}

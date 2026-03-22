@@ -28,14 +28,14 @@ const JobList = ({
         <JobCategoryFilter
           setCategorySearch={setCategorySearch}
           categorySearch={categorySearch}
-        />
+        ></JobCategoryFilter>
         <Jobs
           titleSearch={titleSearch}
           locationSearch={locationSearch}
           categorySearch={categorySearch}
           jobs={jobs}
           showSpinner={showSpinner}
-        />
+        ></Jobs>
       </div>
     </>
   );
