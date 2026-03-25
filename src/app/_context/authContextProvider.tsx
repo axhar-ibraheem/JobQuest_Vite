@@ -20,7 +20,7 @@ const initialState: AuthState = {
   isGuest: false,
 };
 
-const authReducer = (state: AuthState, action: AuthAction) => {
+const authReducer = (state: AuthState, action: AuthAction): AuthState => {
   switch (action.type) {
     case "LOGIN": {
       sessionStorage.setItem("idToken", action.idToken);
@@ -29,6 +29,7 @@ const authReducer = (state: AuthState, action: AuthAction) => {
         ...state,
         idToken: action.idToken,
         email: action.email,
+        isGuest: false,
       };
     }
     case "LOGIN_AS_GUEST": {
@@ -41,8 +42,11 @@ const authReducer = (state: AuthState, action: AuthAction) => {
         ...state,
         idToken: "",
         email: "",
+        isGuest: false,
       };
     }
+    default:
+      return state;
   }
 };
 
