@@ -18,7 +18,23 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+
+    /* Path aliases */
+    "baseUrl": ".",
+    "paths": {
+      "@jobquest/components": ["src/app/_components/index.ts"],
+      "@jobquest/shared": ["src/app/_shared/index.ts"],
+      "@jobquest/models": ["src/app/_models/index.ts"],
+      "@jobquest/hooks": ["src/app/_hooks/index.ts"],
+      "@jobquest/context": ["src/app/_context/index.ts"],
+      "@jobquest/constants": ["src/app/_constants/index.ts"],
+      "@jobquest/utils": ["src/app/_utils/index.ts"],
+      "@jobquest/routes": ["src/app/_routes/index.ts"],
+      "@jobquest/data": ["src/app/_data/index.ts"],
+      "@jobquest/assets/*": ["src/assets/*"]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
