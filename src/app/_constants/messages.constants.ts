@@ -10,6 +10,9 @@ export const MESSAGES = {
     "Password must be more than seven characters long!",
   NAME_VALIDATION_ERROR_MESSAGE: "Please enter the full name",
   CONFIRM_PASSWORD_VALIDATION_MESSAGE: "Passwords don't match!",
+  FIRST_NAME_VALIDATION_MESSAGE: "Please enter a valid first name",
+  LAST_NAME_VALIDATION_MESSAGE: "Please enter a valid last name",
+  LOCATION_VALIDATION_MESSAGE: "Please enter a location",
 } as const;
 
 export const TOAST_CONFIG: ToastOptions = {

@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { useState } from "react";
 import { AuthContext } from "@jobquest/context";
+import { ROUTES } from "@jobquest/constants";
 
 const NavLinks = () => {
   const [show, setShow] = useState(false);
@@ -33,14 +34,14 @@ const NavLinks = () => {
       </button>
       {show && (
         <div className="shadow-2xl rounded-md overflow-hidden grid w-40  top-14 -left-12 md:-left-6 absolute">
-          <Link to="/dashboard">
+          <Link to={ROUTES.DASHBOARD}>
             <button className="bg-yellow-50 text-lg flex items-center justify-center gap-2 hover:bg-slate-200    shadow-md w-full py-3 text-gray-900 capitalize tracking-wider">
               <BiSolidHome className="text-2xl text-blue-900"></BiSolidHome>
               <span>home</span>
             </button>
           </Link>
 
-          <Link to="/profile">
+          <Link to={ROUTES.PROFILE}>
             <button className="bg-yellow-50 text-lg flex items-center justify-center gap-2 hover:bg-slate-200    shadow-md w-full py-3 text-gray-900 capitalize tracking-wider">
               <BiSolidUser className="text-2xl text-blue-900"></BiSolidUser>
               <span>profile</span>

@@ -139,7 +139,7 @@ const ProfilePage = () => {
             onChange={firstNameInputChangeHandler}
             onBlur={firstNameInputBlurHandler}
             error={firstNameHasError}
-            message="Please enter a valid first name"
+            message={MESSAGES.FIRST_NAME_VALIDATION_MESSAGE}
           ></FormRow>
           <FormRow
             label="last name"
@@ -152,7 +152,7 @@ const ProfilePage = () => {
             onChange={lastNameInputChangeHandler}
             onBlur={lastNameInputBlurHandler}
             error={lastNameHasError}
-            message="Please enter a valid last name"
+            message={MESSAGES.LAST_NAME_VALIDATION_MESSAGE}
           ></FormRow>
           <FormRow
             label="email"
@@ -166,7 +166,7 @@ const ProfilePage = () => {
             onChange={emailInputHandler}
             onBlur={emailBlurHandler}
             error={emailHasError}
-            message="Email must include `@`"
+            message={MESSAGES.EMAIL_VALIDATION_ERROR_MESSAGE}
           ></FormRow>
           <FormRow
             label="location"
@@ -179,7 +179,7 @@ const ProfilePage = () => {
             onChange={locationInputHandler}
             onBlur={locationBlurHandler}
             error={locationHasError}
-            message="Please enter a location"
+            message={MESSAGES.LOCATION_VALIDATION_MESSAGE}
           ></FormRow>
           <button className="bg-blue-900 tracking-wider text-white px-4 py-2 my-3 rounded-md capitalize">
             Update profile
