@@ -1,4 +1,4 @@
-import { Job } from "../../../_models/job.types";
+import { Job } from "@jobquest/models";
 
 interface JobFilters {
   titleSearch: string;

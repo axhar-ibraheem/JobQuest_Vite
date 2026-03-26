@@ -8,7 +8,12 @@ import { IoMdLogIn } from "react-icons/io";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { ModalView } from "@jobquest/models";
-import { TOAST_CONFIG, AUTH_ENDPOINT, ROUTES } from "@jobquest/constants";
+import {
+  TOAST_CONFIG,
+  AUTH_ENDPOINT,
+  ROUTES,
+  MESSAGES,
+} from "@jobquest/constants";
 
 interface LoginResponse {
   idToken: string;
@@ -87,7 +92,7 @@ const Login = ({ setActiveModal }: LoginProps) => {
             onChange={emailInputHandler}
             onBlur={emailBlurHandler}
             error={emailHasError}
-            message="Email must include @"
+            message={MESSAGES.EMAIL_VALIDATION_ERROR_MESSAGE}
           ></FormRow>
           <FormRow
             label="password"
@@ -100,7 +105,7 @@ const Login = ({ setActiveModal }: LoginProps) => {
             onChange={passwordInputHandler}
             onBlur={passwordBlurHandler}
             error={passwordHasError}
-            message="Password must be more than seven characters long!"
+            message={MESSAGES.PASSWORD_VALIDATION_ERROR_MESSAGE}
             eyeIcon={
               enteredPassword.length > 0 && (
                 <div

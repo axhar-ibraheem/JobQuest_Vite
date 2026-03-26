@@ -132,7 +132,7 @@ const SignUp = ({ setActiveModal }: SignUpProps) => {
             onChange={nameInputHandler}
             onBlur={nameBlurHandler}
             error={nameHasError}
-            message="Please enter the full name"
+            message={MESSAGES.NAME_VALIDATION_ERROR_MESSAGE}
           ></FormRow>
           <FormRow
             label="email"
@@ -146,7 +146,7 @@ const SignUp = ({ setActiveModal }: SignUpProps) => {
             onChange={emailInputHandler}
             onBlur={emailBlurHandler}
             error={emailHasError}
-            message="Email must include `@`"
+            message={MESSAGES.EMAIL_VALIDATION_ERROR_MESSAGE}
           ></FormRow>
           <FormRow
             label="password"
@@ -159,7 +159,7 @@ const SignUp = ({ setActiveModal }: SignUpProps) => {
             onChange={passwordInputHandler}
             onBlur={passwordBlurHandler}
             error={passwordHasError}
-            message="Password must be more than seven characters long!"
+            message={MESSAGES.PASSWORD_VALIDATION_ERROR_MESSAGE}
             eyeIcon={enteredPassword.length > 0 && passwordVisiblityIcon}
           ></FormRow>
           <FormRow
@@ -173,7 +173,7 @@ const SignUp = ({ setActiveModal }: SignUpProps) => {
             onChange={confirmPasswordInputHandler}
             onBlur={confirmPasswordBlurHandler}
             error={confirmPasswordHasError}
-            message="Passwords don't match!"
+            message={MESSAGES.CONFIRM_PASSWORD_VALIDATION_MESSAGE}
             eyeIcon={enteredConfirmPassword.length > 0 && passwordVisiblityIcon}
           ></FormRow>
           <button className="text-lg lg:text-xl mb-4 mt-3 flex items-center justify-center gap-2 bg-cyan-900 text-white px-4 py-2 w-full rounded-md capitalize tracking-wide">
